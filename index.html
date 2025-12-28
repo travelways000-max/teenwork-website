@@ -1,36 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TeenWork</title>
+  <title>TeenWork – Earn & Grow</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background: #0f172a;
       color: white;
     }
 
-    .hero {
-      height: 100vh;
-      background-image: url("105271-1080x2240-iphone-hd-spider-man-into-the-spider-verse-background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    header {
+      background: linear-gradient(135deg, #0f172a, #020617);
+      padding: 40px;
       text-align: center;
-      background-color: rgba(0,0,0,0.6);
-      background-blend-mode: darken;
     }
 
     h1 {
-      font-size: 42px;
+      margin: 0;
+      font-size: 36px;
     }
 
-    p {
-      font-size: 18px;
+    .section {
+      padding: 40px;
+      text-align: center;
+    }
+
+    input, select {
+      padding: 10px;
+      width: 90%;
+      max-width: 300px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
     }
 
     button {
@@ -40,34 +43,83 @@
       font-size: 16px;
       cursor: pointer;
       border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: #020617;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 400px;
+    }
+
+    img {
+      width: 250px;
       margin-top: 15px;
     }
 
-    .section {
-      padding: 40px;
-      background: #0f172a;
-      text-align: center;
+    a {
+      color: #22c55e;
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
 
-  <button class="btn">Join Now</button>
+<header>
+  <h1>TeenWork 🚀</h1>
+  <p>Earn • Learn • Grow</p>
+</header>
 
-<button class="btn">Join Now</button>
-
-<div class="about-box">
-  <h3>About Me</h3>
-  <p>My name is <b>Durgesh ❤️</b></p>
-  <p>Age – 18 Teen 👀</p>
-  <p>Workflow – Engineering ⚡</p>
-  <p>
-    Instagram:
-    <a href="https://instagram.com/travel_ways_001" target="_blank">
-      @travel_ways_001
-    </a>
-  </p>
+<!-- LOGIN SECTION -->
+<div class="section">
+  <h2>Login</h2>
+  <button>🔵 Login with Google (Demo)</button>
+  <p style="font-size:14px;">(Real login will be added later)</p>
 </div>
+
+<!-- WORK FORM -->
+<div class="section card">
+  <h2>Choose Your Work</h2>
+
+  <input type="text" placeholder="Your Name" />
+  <input type="number" placeholder="Your Age" />
+
+  <select>
+    <option>Select Work</option>
+    <option>Video Editing</option>
+    <option>Graphic Design</option>
+    <option>Content Writing</option>
+    <option>Social Media Manager</option>
+    <option>Website Design</option>
+  </select>
+
+  <p>Payment for work: ₹500 – ₹2000</p>
+
+  <button>Submit</button>
+</div>
+
+<!-- PAYMENT -->
+<div class="section card">
+  <h2>Pay to Join</h2>
+  <p>Scan QR & Pay</p>
+
+  <img src="NaviQR_Master DURGESH BHARAT PATIL_17102025203611674.png" alt="UPI QR Code">
+
+  <p><b>UPI ID:</b> 9156921372@naviaxis</p>
+</div>
+
+<!-- CONTACT -->
+<div class="section">
+  <h2>Contact Me</h2>
+
+  <p>Instagram:</p>
+  <a href="https://instagram.com/nature_gives_all_001" target="_blank">
+    @nature_gives_all_001
+  </a>
+</div>
+
 </body>
 </html>

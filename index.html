@@ -1,125 +1,121 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>TeenWork – Earn & Grow</title>
+        </div>
+    </section>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-    }
+    <!-- Feedback Section -->
+    <section id="feedback" class="py-16 px-4">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-3xl font-bold mb-4">Send Us Feedback</h2>
+            <p class="text-gray-600 mb-8">
+                We'd love to hear your thoughts and suggestions!
+            </p>
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <form>
+                    <div class="mb-4">
+                        <input type="text" placeholder="Your Name" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div class="mb-4">
+                        <input type="email" placeholder="Your Email" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div class="mb-4">
+                        <textarea placeholder="Your Feedback" rows="5" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-md hover:bg-indigo-700 transition duration-300">
+                        Send Feedback
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-    header {
-      background: linear-gradient(135deg, #0f172a, #020617);
-      padding: 40px;
-      text-align: center;
-    }
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-6 px-4">
+        <p>&copy; 2024 My CSC Store. All rights reserved.</p>
+    </footer>
 
-    h1 {
-      margin: 0;
-      font-size: 36px;
-    }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const preregistrationForm = document.getElementById('preregistration-form');
+            const preregistrationSuccess = document.getElementById('preregistration-success');
+            const serviceSelect = document.getElementById('preregistration-service');
+            const additionalInfo = document.getElementById('additional-transaction-info');
 
-    .section {
-      padding: 40px;
-      text-align: center;
-    }
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const navigationMenu = document.getElementById('navigation-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                navigationMenu.classList.toggle('hidden');
+                navigationMenu.classList.toggle('flex');
+            });
 
-    input, select {
-      padding: 10px;
-      width: 90%;
-      max-width: 300px;
-      margin: 10px;
-      border-radius: 5px;
-      border: none;
-    }
+            // Show/hide additional info based on service selection
+            serviceSelect.addEventListener('change', (e) => {
+                const value = e.target.value;
+                if (value === 'Withdrawal' || value === 'Transfer' || value === 'Deposit') {
+                    additionalInfo.classList.remove('hidden');
+                } else {
+                    additionalInfo.classList.add('hidden');
+                }
+            });
 
-    button {
-      background: #22c55e;
-      border: none;
-      padding: 12px 25px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
+            preregistrationForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // For now, this just displays a success message.
+                // You would need a backend service to actually send the email.
+                preregistrationSuccess.classList.remove('hidden');
+                preregistrationForm.reset();
+                additionalInfo.classList.add('hidden');
+                
+                // You could collect the data like this for an email service
+                const name = document.getElementById('preregistration-name').value;
+                const phone = document.getElementById('preregistration-phone').value;
+                const service = document.getElementById('preregistration-service').value;
+                const details = document.getElementById('preregistration-details').value;
+                
+                const subject = `New Pre-registration from ${name}`;
+                const body = `Name: ${name}\nPhone: ${phone}\nService: ${service}\nDetails: ${details || 'N/A'}`;
+                
+                // In a real-world scenario, you would use a backend service to send this email.
+                console.log(`Pre-registration Data to Send:
+                Subject: ${subject}
+                Body: ${body}
+                `);
+            });
+            
+            // Download functionality
+            const downloadButton = document.getElementById('download-button');
+            downloadButton.addEventListener('click', () => {
+                const content = document.documentElement.outerHTML;
+                const blob = new Blob([content], {type: 'text/html'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'my_csc_website.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
 
-    .card {
-      background: #020617;
-      margin: 20px auto;
-      padding: 25px;
-      border-radius: 10px;
-      max-width: 400px;
-    }
-
-    img {
-      width: 250px;
-      margin-top: 15px;
-    }
-
-    a {
-      color: #22c55e;
-      text-decoration: none;
-    }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h1>TeenWork 🚀</h1>
-  <p>Earn • Learn • Grow</p>
-</header>
-
-<!-- LOGIN SECTION -->
-<div class="section">
-  <h2>Login</h2>
-  <button>🔵 Login with Google (Demo)</button>
-  <p style="font-size:14px;">(Real login will be added later)</p>
-</div>
-
-<!-- WORK FORM -->
-<div class="section card">
-  <h2>Choose Your Work</h2>
-
-  <input type="text" placeholder="Your Name" />
-  <input type="number" placeholder="Your Age" />
-
-  <select>
-    <option>Select Work</option>
-    <option>Video Editing</option>
-    <option>Graphic Design</option>
-    <option>Content Writing</option>
-    <option>Social Media Manager</option>
-    <option>Website Design</option>
-  </select>
-
-  <p>Payment for work: ₹500 – ₹2000</p>
-
-  <button>Submit</button>
-</div>
-
-<!-- PAYMENT -->
-<div class="section card">
-  <h2>Pay to Join</h2>
-  <p>Scan QR & Pay</p>
-
-  <img src="NaviQR_Master DURGESH BHARAT PATIL_17102025203611674.png" alt="UPI QR Code">
-
-  <p><b>UPI ID:</b> 9156921372@naviaxis</p>
-</div>
-
-<!-- CONTACT -->
-<div class="section">
-  <h2>Contact Me</h2>
-
-  <p>Instagram:</p>
-  <a href="https://instagram.com/nature_gives_all_001" target="_blank">
-    @nature_gives_all_001
-  </a>
-</div>
-
+            // Share functionality
+            const shareButton = document.getElementById('share-button');
+            shareButton.addEventListener('click', async () => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: 'My CSC Store Website',
+                            text: 'Check out my new CSC store website!',
+                            url: window.location.href,
+                        });
+                        console.log('Website shared successfully');
+                    } catch (error) {
+                        console.error('Error sharing:', error);
+                    }
+                } else {
+                    alert('Sharing is not supported on this browser.');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

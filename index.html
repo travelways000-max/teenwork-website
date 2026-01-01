@@ -1,121 +1,122 @@
-        </div>
-    </section>
-
-    <!-- Feedback Section -->
-    <section id="feedback" class="py-16 px-4">
-        <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-3xl font-bold mb-4">Send Us Feedback</h2>
-            <p class="text-gray-600 mb-8">
-                We'd love to hear your thoughts and suggestions!
-            </p>
-            <div class="bg-white p-8 rounded-lg shadow-md">
-                <form>
-                    <div class="mb-4">
-                        <input type="text" placeholder="Your Name" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div class="mb-4">
-                        <input type="email" placeholder="Your Email" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                    </div>
-                    <div class="mb-4">
-                        <textarea placeholder="Your Feedback" rows="5" class="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 px-6 rounded-md hover:bg-indigo-700 transition duration-300">
-                        Send Feedback
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-6 px-4">
-        <p>&copy; 2024 My CSC Store. All rights reserved.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const preregistrationForm = document.getElementById('preregistration-form');
-            const preregistrationSuccess = document.getElementById('preregistration-success');
-            const serviceSelect = document.getElementById('preregistration-service');
-            const additionalInfo = document.getElementById('additional-transaction-info');
-
-            // Mobile menu toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const navigationMenu = document.getElementById('navigation-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                navigationMenu.classList.toggle('hidden');
-                navigationMenu.classList.toggle('flex');
-            });
-
-            // Show/hide additional info based on service selection
-            serviceSelect.addEventListener('change', (e) => {
-                const value = e.target.value;
-                if (value === 'Withdrawal' || value === 'Transfer' || value === 'Deposit') {
-                    additionalInfo.classList.remove('hidden');
-                } else {
-                    additionalInfo.classList.add('hidden');
-                }
-            });
-
-            preregistrationForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                // For now, this just displays a success message.
-                // You would need a backend service to actually send the email.
-                preregistrationSuccess.classList.remove('hidden');
-                preregistrationForm.reset();
-                additionalInfo.classList.add('hidden');
-                
-                // You could collect the data like this for an email service
-                const name = document.getElementById('preregistration-name').value;
-                const phone = document.getElementById('preregistration-phone').value;
-                const service = document.getElementById('preregistration-service').value;
-                const details = document.getElementById('preregistration-details').value;
-                
-                const subject = `New Pre-registration from ${name}`;
-                const body = `Name: ${name}\nPhone: ${phone}\nService: ${service}\nDetails: ${details || 'N/A'}`;
-                
-                // In a real-world scenario, you would use a backend service to send this email.
-                console.log(`Pre-registration Data to Send:
-                Subject: ${subject}
-                Body: ${body}
-                `);
-            });
-            
-            // Download functionality
-            const downloadButton = document.getElementById('download-button');
-            downloadButton.addEventListener('click', () => {
-                const content = document.documentElement.outerHTML;
-                const blob = new Blob([content], {type: 'text/html'});
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'my_csc_website.html';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            });
-
-            // Share functionality
-            const shareButton = document.getElementById('share-button');
-            shareButton.addEventListener('click', async () => {
-                if (navigator.share) {
-                    try {
-                        await navigator.share({
-                            title: 'My CSC Store Website',
-                            text: 'Check out my new CSC store website!',
-                            url: window.location.href,
-                        });
-                        console.log('Website shared successfully');
-                    } catch (error) {
-                        console.error('Error sharing:', error);
-                    }
-                } else {
-                    alert('Sharing is not supported on this browser.');
-                }
-            });
-        });
-    </script>
-</body>
+  <!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrokerConnect</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #ffffff;
+    }
+    header {
+      background: #020617;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      color: #38bdf8;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #22c55e;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 15px;
+    }
+    input, textarea, select {
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid #334155;
+    }
+    button {
+      background: #22c55e;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    footer {
+      background: #020617;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #94a3b8;
+    }
+    .note {
+      font-size: 14px;
+      color: #cbd5f5;
+    }
+  </style>
+</head>
+<body><header>
+  <h1>BrokerConnect</h1>
+  <p>Connect People Through Experience • Only Via Me</p>
+</header><section>
+  <div class="card">
+    <h2>About Me</h2>
+    <p>
+      Hi, I am <strong>Durgesh</strong> 👋<br>
+      I work as a connector (broker) between people based on their work experience and needs.
+      No direct contact between users — everything goes through me.
+    </p>
+  </div>  <div class="card">
+    <h2>For People Looking for Help</h2>
+    <p class="note">Tell me what kind of professional or experience you need.</p>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <select required>
+        <option value="">Type of Work Needed</option>
+        <option>Engineering</option>
+        <option>Design</option>
+        <option>Video Editing</option>
+        <option>Marketing</option>
+        <option>Other</option>
+      </select>
+      <textarea rows="4" placeholder="Describe your requirement"></textarea>
+      <button type="submit">Send Request to Me</button>
+    </form>
+  </div>  <div class="card">
+    <h2>For Experienced People</h2>
+    <p class="note">Share your experience. I will connect you to the right people.</p>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="text" placeholder="Your Skill / Profession" required />
+      <select required>
+        <option value="">Years of Experience</option>
+        <option>0–1 Years</option>
+        <option>1–3 Years</option>
+        <option>3–5 Years</option>
+        <option>5+ Years</option>
+      </select>
+      <textarea rows="4" placeholder="Briefly explain your experience"></textarea>
+      <button type="submit">Submit Experience</button>
+    </form>
+  </div>  <div class="card">
+    <h2>Contact Me Directly</h2>
+    <p>
+      📩 Email: yourname@email.com <br>
+      📷 Instagram: <strong>@your_instagram_id</strong>
+    </p>
+  </div>
+</section><footer>
+  © 2026 BrokerConnect • All connections handled by me only
+</footer></body>
 </html>

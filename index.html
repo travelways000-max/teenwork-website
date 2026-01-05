@@ -1,38 +1,54 @@
-  <!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BrokerConnect</title>
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0f172a;
       color: #ffffff;
+
+      /* Background Image Style */
+      background-image: 
+        linear-gradient(rgba(2,6,23,0.85), rgba(2,6,23,0.85)),
+        url("105271-1080x2240-iphone-hd-spider-man-into-the-spider-verse-background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
+
     header {
-      background: #020617;
-      padding: 20px;
+      background: rgba(2, 6, 23, 0.9);
+      padding: 25px;
       text-align: center;
     }
+
     header h1 {
       margin: 0;
       color: #38bdf8;
     }
+
     section {
       padding: 40px 20px;
       max-width: 900px;
       margin: auto;
     }
+
     .card {
-      background: #1e293b;
+      background: rgba(30, 41, 59, 0.95);
       padding: 25px;
-      border-radius: 12px;
+      border-radius: 14px;
       margin-bottom: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
+
     h2 {
       color: #22c55e;
     }
+
     input, textarea, select, button {
       width: 100%;
       padding: 12px;
@@ -41,34 +57,49 @@
       border: none;
       font-size: 15px;
     }
+
     input, textarea, select {
-      background: #0f172a;
+      background: #020617;
       color: #fff;
       border: 1px solid #334155;
     }
+
     button {
       background: #22c55e;
       color: #000;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
     }
+
+    button:hover {
+      background: #16a34a;
+    }
+
     footer {
-      background: #020617;
+      background: rgba(2, 6, 23, 0.95);
       text-align: center;
       padding: 15px;
       font-size: 14px;
       color: #94a3b8;
     }
+
     .note {
       font-size: 14px;
       color: #cbd5f5;
     }
   </style>
 </head>
-<body><header>
+
+<body>
+
+<header>
   <h1>BrokerConnect</h1>
   <p>Connect People Through Experience • Only Via Me</p>
-</header><section>
+</header>
+
+<section>
+
   <div class="card">
     <h2>About Me</h2>
     <p>
@@ -76,12 +107,25 @@
       I work as a connector (broker) between people based on their work experience and needs.
       No direct contact between users — everything goes through me.
     </p>
-  </div>  <div class="card">
+  </div>
+
+  <div class="card">
+    <h2>User Type</h2>
+    <p class="note">Select what you are here for.</p>
+    <select required>
+      <option value="">I am a...</option>
+      <option>Job Giver (Need a Worker)</option>
+      <option>Worker / Experienced Professional</option>
+    </select>
+  </div>
+
+  <div class="card">
     <h2>For People Looking for Help</h2>
     <p class="note">Tell me what kind of professional or experience you need.</p>
     <form>
       <input type="text" placeholder="Your Name" required />
       <input type="email" placeholder="Your Email" required />
+
       <select required>
         <option value="">Type of Work Needed</option>
         <option>Engineering</option>
@@ -90,15 +134,19 @@
         <option>Marketing</option>
         <option>Other</option>
       </select>
+
       <textarea rows="4" placeholder="Describe your requirement"></textarea>
       <button type="submit">Send Request to Me</button>
     </form>
-  </div>  <div class="card">
+  </div>
+
+  <div class="card">
     <h2>For Experienced People</h2>
     <p class="note">Share your experience. I will connect you to the right people.</p>
     <form>
       <input type="text" placeholder="Your Name" required />
       <input type="text" placeholder="Your Skill / Profession" required />
+
       <select required>
         <option value="">Years of Experience</option>
         <option>0–1 Years</option>
@@ -106,24 +154,25 @@
         <option>3–5 Years</option>
         <option>5+ Years</option>
       </select>
+
       <textarea rows="4" placeholder="Briefly explain your experience"></textarea>
       <button type="submit">Submit Experience</button>
     </form>
-  </div>  <div class="card">
+  </div>
+
+  <div class="card">
     <h2>Contact Me Directly</h2>
     <p>
       📩 Email: travelways000@gmail.com <br>
-      📷 Instagram: <strong>@your_instagram_id</strong>
+      📷 Instagram: <strong>@durgeshhh002</strong>
     </p>
   </div>
-</section><footer>
+
+</section>
+
+<footer>
   © 2026 BrokerConnect • All connections handled by me only
-<style>
-body {
-    background-image: url("105271-1080x2240-iphone-hd-spider-man-into-the-spider-verse-background.jpg");
-    background-size: cover;
-    background-position: center;
-}
-</style>
-</footer></body>
+</footer>
+
+</body>
 </html>

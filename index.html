@@ -118,6 +118,14 @@
       <option>Worker / Experienced Professional</option>
     </select>
   </div>
+<div class="card" style="text-align:center;">
+  <h2>🎁 Open the Lucky Box</h2>
+  <p class="note">Open one box and get a surprise reward!</p>
+
+  <button onclick="openBox()">Open Mystery Box</button>
+
+  <p id="reward" style="margin-top:20px; font-size:18px; font-weight:bold;"></p>
+</div>
 
   <div class="card">
     <h2>For People Looking for Help</h2>
@@ -173,6 +181,19 @@
 <footer>
   © 2026 BrokerConnect • All connections handled by me only
 </footer>
+<script>
+function openBox() {
+  const rewards = [
+    "🎉 You won ₹50 Voucher!",
+    "🔥 You won ₹100 Discount!",
+    "🤝 Free Broker Connection!",
+    "😄 Better Luck Next Time!"
+  ];
+
+  const randomReward = rewards[Math.floor(Math.random() * rewards.length)];
+  document.getElementById("reward").innerText = randomReward;
+}
+</script>
 
 </body>
 </html>

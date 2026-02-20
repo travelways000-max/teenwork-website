@@ -1,311 +1,578 @@
-import React, { useState } from 'react';
-import { AlertCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Brain, Sparkles, Zap, Code, Layout, MessageSquare, ChevronLeft, ChevronRight, X, Github, Linkedin, Instagram, Mail, ArrowRight, CheckCircle, Target, Lightbulb } from 'lucide-react';
 
-const PettinessMeter = () => {
-  const [grievance, setGrievance] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState('');
-  const [displayScore, setDisplayScore] = useState(0);
+const AIPortfolio = () => {
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [particles, setParticles] = useState([]);
 
-  const exampleGrievances = [
-    { label: "Loud breathing", text: "My roommate breathes too loudly" },
-    { label: "Door holding", text: "Someone didn't say thank you when I held the door" },
-    { label: "Fish microwaver", text: "My coworker microwaves fish at lunch" },
-    { label: "Wrong TP", text: "They put the toilet paper roll on backwards" }
+  // Generate floating particles for hero background
+  useEffect(() => {
+    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 10 + 10,
+      delay: Math.random() * 5
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  const services = [
+    {
+      icon: <Brain className="w-8 h-8" />,
+      title: "Prompt Engineering",
+      description: "Craft advanced prompts that unlock AI's full potential for your specific use cases and workflows."
+    },
+    {
+      icon: <Zap className="w-8 h-8" />,
+      title: "AI Automation Setup",
+      description: "Build intelligent automation workflows that save time and increase productivity across your operations."
+    },
+    {
+      icon: <Layout className="w-8 h-8" />,
+      title: "AI Content Strategy",
+      description: "Develop comprehensive AI-powered content systems that scale your output while maintaining quality."
+    },
+    {
+      icon: <MessageSquare className="w-8 h-8" />,
+      title: "ChatGPT Workflow Design",
+      description: "Design custom ChatGPT workflows tailored to your business processes and team needs."
+    },
+    {
+      icon: <Code className="w-8 h-8" />,
+      title: "Custom AI Tools",
+      description: "Create bespoke AI-powered tools and applications that solve your unique business challenges."
+    },
+    {
+      icon: <Sparkles className="w-8 h-8" />,
+      title: "AI Integration Consulting",
+      description: "Strategic guidance on integrating AI into your existing systems and maximizing ROI."
+    }
   ];
 
-  const analyzeGrievance = async () => {
-    if (!grievance.trim()) {
-      setError('Please enter a grievance to analyze!');
-      return;
+  const projects = [
+    {
+      title: "E-commerce Content Automation",
+      problem: "Client needed to generate 500+ product descriptions weekly while maintaining brand voice and SEO optimization.",
+      solution: "Built a custom prompt engineering system with GPT-4 that automated content generation with brand-specific guidelines and SEO parameters.",
+      result: "Reduced content production time by 85% and increased organic traffic by 142% in 3 months.",
+      tags: ["Prompt Engineering", "Automation", "SEO"]
+    },
+    {
+      title: "Customer Support AI Assistant",
+      problem: "Support team overwhelmed with repetitive inquiries, averaging 4-hour response times.",
+      solution: "Designed and implemented a ChatGPT-powered support system with custom knowledge base integration and escalation protocols.",
+      result: "Response time reduced to under 30 seconds, customer satisfaction increased by 68%, support costs decreased by 40%.",
+      tags: ["ChatGPT", "Automation", "Integration"]
+    },
+    {
+      title: "Legal Document Analysis System",
+      problem: "Law firm spending 20+ hours per week reviewing and summarizing contracts and legal documents.",
+      solution: "Created specialized AI workflows for document analysis, key clause extraction, and risk assessment with legal accuracy validation.",
+      result: "Document review time reduced by 75%, accuracy improved by 30%, freed up 80 billable hours per month.",
+      tags: ["Custom AI Tools", "Workflow Design"]
+    },
+    {
+      title: "Marketing Campaign Generator",
+      problem: "Marketing agency needed scalable solution for creating multi-channel campaign content for diverse clients.",
+      solution: "Developed an AI content strategy system with persona-based prompts and multi-format output generation.",
+      result: "Campaign development time cut by 70%, client onboarding accelerated by 50%, revenue increased 3x.",
+      tags: ["Content Strategy", "Prompt Engineering"]
     }
+  ];
 
-    setLoading(true);
-    setError('');
-
-    try {
-      const prompt = `You are a humorous but fair judge of pettiness. Analyze the following grievance and rate it on a scale from 0 to 100, where:
-      - 0-20: Legitimate concern (This is actually serious!)
-      - 21-40: Reasonable gripe (Fair enough, that's annoying)
-      - 41-60: Getting petty (Okay, but maybe chill a bit?)
-      - 61-80: Pretty petty (You might want to let this one go...)
-      - 81-100: Peak pettiness (Seriously? Let it go!)
-
-      Grievance: "${grievance}"
-
-      Respond ONLY with a valid JSON object in this exact format:
-      {
-        "score": [number between 0-100],
-        "category": "[one of the category names above]",
-        "judgment": "[A funny but not mean 1-2 sentence judgment about their grievance]",
-        "advice": "[A humorous but helpful suggestion in 1 sentence]"
-      }
-
-      DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON.`;
-
-      const response = await window.claude.complete(prompt);
-      const data = JSON.parse(response);
-      setResult(data);
-      
-      // Animate the score
-      animateScore(data.score);
-    } catch (err) {
-      setError('Failed to analyze grievance. Please try again!');
-      console.error('Error:', err);
-    } finally {
-      setLoading(false);
+  const testimonials = [
+    {
+      name: "Sarah Chen",
+      role: "CEO, TechVenture Inc.",
+      text: "The AI automation system transformed our workflow completely. What used to take our team days now happens in minutes. ROI was evident within the first month.",
+      image: "👩‍💼"
+    },
+    {
+      name: "Michael Rodriguez",
+      role: "Marketing Director, GrowthLabs",
+      text: "Exceptional prompt engineering skills. The custom ChatGPT workflows have become indispensable to our content operations. Highly recommend!",
+      image: "👨‍💼"
+    },
+    {
+      name: "Emily Watson",
+      role: "Founder, CreativeHub",
+      text: "Working together on our AI content strategy was a game-changer. The strategic approach and technical expertise delivered results beyond our expectations.",
+      image: "👩‍💻"
     }
+  ];
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
   };
 
-  const animateScore = (targetScore) => {
-    const duration = 1500; // 1.5 seconds
-    const startTime = Date.now();
-    const startScore = 0;
-
-    const updateScore = () => {
-      const now = Date.now();
-      const progress = Math.min((now - startTime) / duration, 1);
-      
-      // Ease-out animation
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      const currentScore = Math.round(startScore + (targetScore - startScore) * easeOut);
-      
-      setDisplayScore(currentScore);
-      
-      if (progress < 1) {
-        requestAnimationFrame(updateScore);
-      }
-    };
-    
-    requestAnimationFrame(updateScore);
-  };
-
-  const getGaugeRotation = (score) => {
-    // Convert 0-100 to -90 to 90 degrees
-    return (score * 1.8) - 90;
-  };
-
-  const getGaugeColor = (score) => {
-    if (score <= 20) return '#9333EA'; // Purple shade 1
-    if (score <= 40) return '#A855F7'; // Purple shade 2
-    if (score <= 60) return '#C084FC'; // Purple shade 3
-    if (score <= 80) return '#E9D5FF'; // Purple shade 4
-    return '#FFFFFF'; // White for peak pettiness
-  };
-  
-  const getGaugeFillDasharray = (score) => {
-    // Arc length is approximately 220
-    const arcLength = 220;
-    const fillLength = (score / 100) * arcLength;
-    return `${fillLength} ${arcLength}`;
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   return (
-    <div className="min-h-screen p-8" style={{ backgroundColor: '#F4BE72' }}>
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-5xl font-bold text-center mb-2" style={{ color: '#45260C' }}>
-          How petty are you?
-        </h1>
-        <p className="text-center mb-8" style={{ color: '#45260C' }}>
-          Share your grievance and let Claude be the judge
-        </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+      
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated background particles */}
+        <div className="absolute inset-0 overflow-hidden">
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="absolute rounded-full bg-blue-500/20"
+              style={{
+                left: `${particle.x}%`,
+                top: `${particle.y}%`,
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                animation: `float ${particle.duration}s ease-in-out infinite`,
+                animationDelay: `${particle.delay}s`
+              }}
+            />
+          ))}
+          {/* Neural network lines */}
+          <svg className="absolute inset-0 w-full h-full opacity-10">
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#3b82f6" />
+                <stop offset="100%" stopColor="#8b5cf6" />
+              </linearGradient>
+            </defs>
+            {Array.from({ length: 15 }, (_, i) => (
+              <line
+                key={i}
+                x1={`${Math.random() * 100}%`}
+                y1={`${Math.random() * 100}%`}
+                x2={`${Math.random() * 100}%`}
+                y2={`${Math.random() * 100}%`}
+                stroke="url(#lineGradient)"
+                strokeWidth="1"
+                className="animate-pulse"
+                style={{ animationDelay: `${i * 0.2}s` }}
+              />
+            ))}
+          </svg>
+        </div>
 
-        {/* Single Container for Everything */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          {/* Gauge Meter */}
-          <div className="flex flex-col items-center mb-8">
-            <div className="relative w-80 h-48 mb-4">
-              <svg viewBox="0 0 200 130" className="w-full h-full">
-                {/* Background arc */}
-                <path
-                  d="M 30 100 A 70 70 0 0 1 170 100"
-                  fill="none"
-                  stroke="#E5E7EB"
-                  strokeWidth="20"
-                  strokeLinecap="round"
-                />
-                
-                {/* Animated fill arc */}
-                <path
-                  d="M 30 100 A 70 70 0 0 1 170 100"
-                  fill="none"
-                  stroke="#E68600"
-                  strokeWidth="20"
-                  strokeLinecap="round"
-                  strokeDasharray={getGaugeFillDasharray(displayScore)}
-                  className="transition-all duration-1500 ease-out"
-                />
-                
-                {/* Gradient definition */}
-                <defs>
-                  <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#EA580C" />
-                    <stop offset="25%" stopColor="#F97316" />
-                    <stop offset="50%" stopColor="#FB923C" />
-                    <stop offset="75%" stopColor="#FDBA74" />
-                    <stop offset="100%" stopColor="#FED7AA" />
-                  </linearGradient>
-                </defs>
-                
-                {/* Labels positioned outside the meter */}
-                <text x="28" y="125" textAnchor="middle" className="text-xs font-medium" fill="#45260C">0</text>
-                <text x="100" y="15" textAnchor="middle" className="text-xs font-medium" fill="#45260C">50</text>
-                <text x="172" y="125" textAnchor="middle" className="text-xs font-medium" fill="#45260C">100</text>
-              </svg>
-              
-              {/* Score display - moved down */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center mt-16">
-                  <span className="text-5xl font-bold block" style={{ color: '#E68600' }}>
-                    {result ? displayScore : 0}%
-                  </span>
-                  {result && (
-                    <span className="text-sm font-medium mt-1 block" style={{ color: '#E68600' }}>
-                      {result.category}
-                    </span>
-                  )}
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+          <div className="inline-block mb-6 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-sm font-medium">
+            <Sparkles className="w-4 h-4 inline mr-2" />
+            AI Expert & Innovation Specialist
+          </div>
+          
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            AI Expert &<br />Prompt Engineer
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Building intelligent systems, writing advanced prompts, and creating AI-powered solutions that transform workflows and accelerate business growth.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+              Work With Me
+              <ArrowRight className="w-5 h-5" />
+            </button>
+            <button className="px-8 py-4 bg-white/5 border border-white/10 rounded-full font-semibold text-lg hover:bg-white/10 transition-all duration-300">
+              View Projects
+            </button>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+            <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse" />
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-24 px-6 bg-slate-900/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                About Me
+              </h2>
+              <p className="text-lg text-slate-300 mb-6 leading-relaxed">
+                I specialize in <span className="text-blue-400 font-semibold">prompt engineering</span>, <span className="text-purple-400 font-semibold">AI content systems</span>, and <span className="text-pink-400 font-semibold">automation workflows</span> that drive measurable business results.
+              </p>
+              <p className="text-lg text-slate-300 mb-6 leading-relaxed">
+                With deep expertise in GPT-4, Claude, and emerging AI technologies, I help businesses unlock the full potential of artificial intelligence through strategic implementation and custom solutions.
+              </p>
+              <p className="text-lg text-slate-300 leading-relaxed">
+                My approach combines technical precision with creative problem-solving to deliver <span className="text-blue-400 font-semibold">AI-driven productivity solutions</span> that scale with your ambitions.
+              </p>
+            </div>
+            
+            <div className="relative">
+              <div className="relative w-full aspect-square rounded-2xl bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20 border border-white/10 flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 animate-pulse" />
+                <Brain className="w-48 h-48 text-blue-400/30" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-32 h-32 border-4 border-purple-500/30 rounded-full animate-spin" style={{ animationDuration: '8s' }} />
                 </div>
               </div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl opacity-20 blur-2xl" />
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-20 blur-2xl" />
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Input Section */}
-          <div className="mb-6">
-            <label className="block text-lg font-semibold mb-3" style={{ color: '#45260C' }}>
-              What's bothering you?
-            </label>
-            
-            {!result ? (
-              <>
-                <textarea
-                  value={grievance}
-                  onChange={(e) => setGrievance(e.target.value)}
-                  placeholder="My roommate ate the last slice of pizza I was saving..."
-                  className="w-full p-4 border-2 border-orange-200 rounded-lg focus:border-orange-500 focus:outline-none resize-none"
-              style={{ borderColor: 'rgba(230, 134, 0, 0.3)', focusBorderColor: '#E68600' }}
-                  rows={4}
-                />
-                
-                {/* Example buttons */}
-                <div className="mt-3">
-                  <div className="flex flex-wrap gap-2">
-                    {exampleGrievances.map((example, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setGrievance(example.text)}
-                        className="px-3 py-1 text-sm border rounded-full transition-colors"
-                        style={{ 
-                          borderColor: '#E68600',
-                          color: '#45260C',
-                          backgroundColor: 'white'
-                        }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = '#FFF5EB';
-                          e.target.style.color = '#E68600';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundColor = 'white';
-                          e.target.style.color = '#45260C';
-                        }}
-                      >
-                        {example.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                {error && (
-                  <div className="mt-3 flex items-center text-red-600">
-                    <AlertCircle className="w-5 h-5 mr-2" />
-                    <span>{error}</span>
-                  </div>
-                )}
-
-                <button
-                  onClick={analyzeGrievance}
-                  disabled={loading}
-                  className={`mt-4 w-full py-4 rounded-lg font-bold text-white transition-all transform hover:scale-105`}
-                  style={{
-                    backgroundColor: loading ? '#F5A854' : '#E68600',
-                  }}
-                  onMouseEnter={(e) => !loading && (e.target.style.backgroundColor = '#CC7700')}
-                  onMouseLeave={(e) => !loading && (e.target.style.backgroundColor = '#E68600')}
-                >
-                  {loading ? 'Analyzing pettiness...' : 'Measure my pettiness!'}
-                </button>
-              </>
-            ) : (
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="italic" style={{ color: '#45260C' }}>"{grievance}"</p>
-              </div>
-            )}
+      {/* Services Section */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Services
+            </h2>
+            <p className="text-xl text-slate-400">
+              Comprehensive AI solutions tailored to your needs
+            </p>
           </div>
 
-          {/* Results Section */}
-          {result && (
-            <div className="animate-fadeIn">
-              <div className="border-t border-gray-200 pt-6">
-                <div className="space-y-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="group p-8 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl hover:border-blue-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20 hover:scale-105"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-xl flex items-center justify-center mb-6 text-blue-400 group-hover:text-blue-300 transition-colors">
+                  {service.icon}
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-blue-400 transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-slate-400 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Section */}
+      <section className="py-24 px-6 bg-slate-900/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Case Studies
+            </h2>
+            <p className="text-xl text-slate-400">
+              Real results from AI implementations
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {projects.map((project, index) => (
+              <div
+                key={index}
+                className="group p-8 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 cursor-pointer"
+                onClick={() => setSelectedProject(project)}
+              >
+                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-purple-400 transition-colors">
+                  {project.title}
+                </h3>
+                
+                <div className="space-y-4 mb-6">
                   <div>
-                    <p className="text-lg font-semibold mb-3" style={{ color: '#45260C' }}>Analysis</p>
-                    <div className="bg-orange-50 rounded-lg p-4">
-                      <p style={{ color: '#45260C' }}>
-                        {result.judgment}
-                      </p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Target className="w-5 h-5 text-red-400" />
+                      <span className="text-sm font-semibold text-slate-300">Problem</span>
                     </div>
+                    <p className="text-slate-400 text-sm leading-relaxed pl-7">
+                      {project.problem}
+                    </p>
                   </div>
                   
                   <div>
-                    <p className="text-lg font-semibold mb-3" style={{ color: '#45260C' }}>Advice</p>
-                    <div className="bg-orange-100 rounded-lg p-4">
-                      <p style={{ color: '#45260C' }}>
-                        {result.advice}
-                      </p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Lightbulb className="w-5 h-5 text-yellow-400" />
+                      <span className="text-sm font-semibold text-slate-300">Solution</span>
                     </div>
+                    <p className="text-slate-400 text-sm leading-relaxed pl-7">
+                      {project.solution}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                      <span className="text-sm font-semibold text-slate-300">Result</span>
+                    </div>
+                    <p className="text-green-400 text-sm font-semibold leading-relaxed pl-7">
+                      {project.result}
+                    </p>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => {
-                    setGrievance('');
-                    setResult(null);
-                    setDisplayScore(0);
-                  }}
-                  className="mt-6 w-full py-3 border-2 rounded-lg font-semibold transition-colors"
-                  style={{ 
-                    borderColor: '#E68600', 
-                    color: '#E68600' 
-                  }}
-                  onMouseEnter={(e) => e.target.style.backgroundColor = '#FFF5EB'}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-                >
-                  Try another grievance
-                </button>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="px-3 py-1 bg-blue-500/10 border border-blue-500/30 rounded-full text-xs text-blue-400"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex items-center text-purple-400 group-hover:text-purple-300 transition-colors">
+                  <span className="text-sm font-medium">View Details</span>
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6" onClick={() => setSelectedProject(null)}>
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-8 relative" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-4 right-4 w-10 h-10 bg-slate-800 hover:bg-slate-700 rounded-full flex items-center justify-center transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <h3 className="text-3xl font-bold mb-6 text-white">
+              {selectedProject.title}
+            </h3>
+
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Target className="w-6 h-6 text-red-400" />
+                  <span className="text-lg font-semibold text-slate-200">The Challenge</span>
+                </div>
+                <p className="text-slate-300 leading-relaxed pl-8">
+                  {selectedProject.problem}
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Lightbulb className="w-6 h-6 text-yellow-400" />
+                  <span className="text-lg font-semibold text-slate-200">The Solution</span>
+                </div>
+                <p className="text-slate-300 leading-relaxed pl-8">
+                  {selectedProject.solution}
+                </p>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <CheckCircle className="w-6 h-6 text-green-400" />
+                  <span className="text-lg font-semibold text-slate-200">The Impact</span>
+                </div>
+                <p className="text-green-400 font-semibold leading-relaxed pl-8">
+                  {selectedProject.result}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 pt-4">
+                {selectedProject.tags.map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className="px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-sm text-blue-400"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
+
+      {/* Testimonials Section */}
+      <section className="py-24 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Client Testimonials
+            </h2>
+            <p className="text-xl text-slate-400">
+              What clients say about working together
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-12 min-h-[300px] flex flex-col justify-center">
+              <div className="text-center mb-8">
+                <div className="text-6xl mb-4">{testimonials[currentTestimonial].image}</div>
+                <p className="text-xl text-slate-300 italic leading-relaxed mb-6">
+                  "{testimonials[currentTestimonial].text}"
+                </p>
+                <div>
+                  <p className="text-lg font-semibold text-white">
+                    {testimonials[currentTestimonial].name}
+                  </p>
+                  <p className="text-slate-400">
+                    {testimonials[currentTestimonial].role}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-center gap-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentTestimonial
+                        ? 'w-8 bg-blue-500'
+                        : 'bg-slate-600 hover:bg-slate-500'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-full flex items-center justify-center transition-colors"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-full flex items-center justify-center transition-colors"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-24 px-6 bg-slate-900/50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Let's Work Together
+            </h2>
+            <p className="text-xl text-slate-400">
+              Ready to transform your workflow with AI?
+            </p>
+          </div>
+
+          <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 md:p-12">
+            <form className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all text-white"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all text-white"
+                    placeholder="your@email.com"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Project Type
+                </label>
+                <select className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all text-white">
+                  <option>Select a service</option>
+                  <option>Prompt Engineering</option>
+                  <option>AI Automation Setup</option>
+                  <option>AI Content Strategy</option>
+                  <option>ChatGPT Workflow Design</option>
+                  <option>Custom AI Tools</option>
+                  <option>AI Integration Consulting</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Message
+                </label>
+                <textarea
+                  rows="6"
+                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all text-white resize-none"
+                  placeholder="Tell me about your project..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-2"
+              >
+                Send Message
+                <Mail className="w-5 h-5" />
+              </button>
+            </form>
+
+            <div className="mt-12 pt-8 border-t border-slate-700">
+              <p className="text-center text-slate-400 mb-6">Connect with me</p>
+              <div className="flex justify-center gap-4">
+                <a
+                  href="#"
+                  className="w-12 h-12 bg-slate-900/50 hover:bg-blue-600/20 border border-slate-700 hover:border-blue-500/50 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a
+                  href="#"
+                  className="w-12 h-12 bg-slate-900/50 hover:bg-purple-600/20 border border-slate-700 hover:border-purple-500/50 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a
+                  href="#"
+                  className="w-12 h-12 bg-slate-900/50 hover:bg-slate-600/20 border border-slate-700 hover:border-slate-500/50 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                >
+                  <Github className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto text-center text-slate-400">
+          <p>&copy; 2026 AI Expert & Prompt Engineer. All rights reserved.</p>
+        </div>
+      </footer>
 
       <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          50% {
+            transform: translateY(-20px) translateX(10px);
           }
-        }
-        
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out;
         }
       `}</style>
     </div>
   );
 };
 
-export default PettinessMeter;
+export default AIPortfolio;

@@ -1,0 +1,28 @@
+/* ── SECTION SLIDING LOGIC ── */
+section {
+  display: none; /* Hide all sections by default */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  padding: 8rem 2rem; /* Adjusted for fixed nav */
+}
+
+/* The active "slide" */
+section.active-slide {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Keep Hero visible only on home/initial load */
+.hero {
+  display: flex;
+}
+.hero.hidden {
+  display: none;
+}
+
+/* Smooth scroll padding adjustment */
+#how, #explore, #contact {
+  scroll-margin-top: 80px;
+}

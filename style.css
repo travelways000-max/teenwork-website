@@ -25,4 +25,10 @@ section.active-slide {
 /* Smooth scroll padding adjustment */
 #how, #explore, #contact {
   scroll-margin-top: 80px;
+} body {
+    background-image: url("105271-1080x2240-iphone-hd-spider-man-into-the-spider-verse-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
